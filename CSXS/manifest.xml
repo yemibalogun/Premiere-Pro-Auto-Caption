@@ -31,7 +31,7 @@
 				</Lifecycle>
 				<UI>
 					<Type>Panel</Type>
-					<Menu>Yosi Panel</Menu>
+					<Menu>Automate Permutation Panel</Menu>
 					<Geometry>
 						<Size>
 							<Height>300</Height>
