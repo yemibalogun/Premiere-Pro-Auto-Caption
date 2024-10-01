@@ -211,6 +211,7 @@ $.runScript = {
 		}
 	
 		var sequenceCounter = 1;
+
 		// Iterate through the clips and generate permutations
 		for (var i = 0; i < beginningClips.length; i++) {
 			for (var j = 0; j < middleClips.length; j++) {
@@ -274,13 +275,13 @@ $.runScript = {
 					}
 
 					// Now queue the sequence to AME after ensuring all clips are added
-					this.queueSequenceToAME(sequence, clipName);
+					this.queueSequenceToAME(sequenceName, clipName);
 
 					sequenceCounter++;
 				}
 			}
 		}
-		alert("All permutations created.");
+		alert("All permutations created. Total sequences: " + (sequenceCounter - 1));
 	},
 	
 
@@ -350,8 +351,8 @@ $.runScript = {
     },
 
 	// Function export a sequence
-	queueSequenceToAME: function (clipName) {
-		$.writeln('Starting exportSequence with sequence name: ' + sequenceName);
+	queueSequenceToAME: function (sequenceName, clipName) {
+		$.writeln('Starting exportSequence with sequence name: ' + clipName);
 
 		// Save the project
 		app.project.save();
@@ -361,7 +362,6 @@ $.runScript = {
 		var outputFilePath = outputFolder + clipName + ".mp4"; // update the format as needed
 		var presetPath = "C:\\Users\\OMEN 15 Pro\\Documents\\Adobe\\Adobe Media Encoder\\23.0\\Presets\\yemi_full_res.epr";
 
-		var sequenceName = "main_sequence";
 		var sequence = this.findSequenceByName(sequenceName);
 
 		if (!sequence) {
