@@ -180,6 +180,51 @@ $.runScript = {
 		}
 	},
 
+	exportAudio: function () {
+		$.writeln('Starting exportAudio function.')
+		var sequence = app.project.activeSequence;
+
+		if (!sequence) {
+			$.writeln('Sequence not found: ' + sequence.name);
+			return;
+		}
+		$.writeln('Sequence found: ' + sequence.name)
+
+		try {
+			var outputPresetPath = "C:\\Users\\OMEN 15 Pro\\Documents\\Adobe\\Adobe Media Encoder\\23.0\\Presets\\yemi_audio_preset.epr";
+			var outputFilePath= "C:\\Users\\OMEN 15 Pro\\Videos\\Exported_audio\\" // output folder
+
+			var audioOutput = outputFilePath + 'new_audio' + ".wav";
+			// Export audio track
+			sequence.exportAsMediaDirect(audioOutput, outputPresetPath, 0);
+		} catch (error) {
+			$.writeln('Error exporting audio: ' + error.message);
+		}
+		
+		$.writeln('Audio exported successfully.');
+
+	},
+
+	addCaptionToSequence: function (sequenceName, captions, startTime, getSequenceEndTime) {
+		var project = app.project;
+		var sequence = project.sequences[sequenceName];
+
+		if (!sequence) {
+			$.writeln('Sequence not found.');
+			return;
+		}
+
+		var captionTrack = sequence.addCaptionTrack();
+
+		for (var i = 0; i < captions.length; i++) {
+			var caption = captionTrack.createCaptionItem(captions[i], startTime, endTime);
+			caption.start = startTime + i * 3; // Just for example
+			caption.end = startTime + (i+1)*3;
+		}
+
+		$.writeln('Captions added successfully.');
+	},
+
 
 	automatePermutations: function () {
 		$.writeln('Starting automatePermutations function.');

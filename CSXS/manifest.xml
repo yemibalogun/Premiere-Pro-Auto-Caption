@@ -31,11 +31,11 @@
 				</Lifecycle>
 				<UI>
 					<Type>Panel</Type>
-					<Menu>Automate Permutation Panel</Menu>
+					<Menu>Auto Caption</Menu>
 					<Geometry>
 						<Size>
-							<Height>300</Height>
-							<Width>300</Width>
+							<Height>150</Height>
+							<Width>150</Width>
 						</Size>
 					</Geometry>
 				</UI>
