@@ -46,20 +46,24 @@ def transcribe_audio(file_path):
 # Function to save the translation into an SRT file
 def save_to_srt(segments, output_srt_file):
     with open(output_srt_file, 'w', encoding='utf-8') as srt_file:
-        for idx, segment in enumerate(segments):
-            # Get start and end times
-            start_time = segment['start']
-            end_time = segment['end']
-            text = segment['text'].strip()
+        if segments is None:
+            print("Error: Segments not found, check transcription process.")
+            return # or hande the error appropriately
+        else:
+            for idx, segment in enumerate(segments):
+                # Get start and end times
+                start_time = segment['start']
+                end_time = segment['end']
+                text = segment['text'].strip()
 
-            # Format time as hours:minutes:seconds,milliseconds
-            start_time_srt = format_srt_time(start_time)
-            end_time_srt = format_srt_time(end_time)
+                # Format time as hours:minutes:seconds,milliseconds
+                start_time_srt = format_srt_time(start_time)
+                end_time_srt = format_srt_time(end_time)
 
-            # Write to the SRT file
-            srt_file.write(f"{idx + 1}\n")
-            srt_file.write(f"{start_time_srt} --> {end_time_srt}\n")
-            srt_file.write(f"{text}\n\n")
+                # Write to the SRT file
+                srt_file.write(f"{idx + 1}\n")
+                srt_file.write(f"{start_time_srt} --> {end_time_srt}\n")
+                srt_file.write(f"{text}\n\n")
 
     print(f"SRT file saved at {output_srt_file}")
 
